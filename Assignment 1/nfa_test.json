@@ -1,0 +1,29 @@
+{
+    "startingState": "S3",
+    "S3": {
+          "isTerminatingState": false,
+          "epsilon": "S1"
+    },
+    "S4": {
+          "isTerminatingState": false,
+          "epsilon": "S5"
+    },
+    "S1": {
+          "isTerminatingState": false,
+          "a": "S2"
+    },
+    "S2": {
+          "isTerminatingState": false,
+          "epsilon": [
+                "S3",
+                "S4"
+          ]
+    },
+    "S5": {
+          "isTerminatingState": false,
+          "b": "S6"
+    },
+    "S6": {
+          "isTerminatingState": true
+    }
+}
