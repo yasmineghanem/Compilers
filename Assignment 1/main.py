@@ -2,6 +2,7 @@ from utils import *
 from dfa import DFA
 from nfa import NFA
 from minDfa import MinDFA
+import os
 
 
 def __main__():
@@ -40,29 +41,32 @@ def __main__():
         print("Invalid regex")
         return
 
+    # 2. Create a directory with the current regex
+    folder_name = create_output_folder(regex, "outputs/")
+
     # 3. Turn regex to postfix
     postfixRegex = regex_to_postfix(regex)
 
     # 4. Turn postfix to NFA & Display
     nfa = NFA(regex=postfixRegex)
-    nfa.get_graph()
+    nfa.get_graph(path="outputs/" + folder_name + '/')
 
     # 5. Write the NFA to a file
-    write_json(nfa.to_json(), "outputs/nfa.json")
+    write_json(nfa.to_json(), "outputs/" + folder_name + "/nfa.json")
 
     # 6. Convert NFA to DFA
     dfa = DFA(nfa=nfa)
-    dfa.get_graph()
+    dfa.get_graph(path="outputs/" + folder_name + '/')
 
     # 7. Write the DFA to a file
-    write_json(dfa.to_json(), "outputs/dfa.json")
+    write_json(dfa.to_json(), "outputs/" + folder_name + "/dfa.json")
 
     # 8. Convert DFA to Minimized DFA
     miniDfa = MinDFA(dfa)
-    miniDfa.get_graph()
+    miniDfa.get_graph(path="outputs/" + folder_name + '/')
 
     # 9. Write the Minimized DFA to a file
-    write_json(miniDfa.to_json(), "outputs/min_dfa.json")
+    write_json(miniDfa.to_json(), "outputs/" + folder_name + "/min_dfa.json")
 
 
 if __name__ == '__main__':

@@ -206,7 +206,7 @@ class NFA:
 
         return {'startingState': self.start_state.name, **states, }
 
-    def get_graph(self, name="outputs/nfa_graph", view=False):
+    def get_graph(self, path="outputs/", view=False):
         '''
         Return the NFA as a graph
         '''
@@ -234,9 +234,5 @@ class NFA:
                 childStates = nextState.split(',')
                 for child in childStates:
                     graph.edge(state, child, label=symbol)
-        graph.render(name, view=view)
+        graph.render(path + "nfa_graph", view=view)
         return graph
-
-    # # Override print
-    # def __str__(self):
-    # 	return self.get_states()

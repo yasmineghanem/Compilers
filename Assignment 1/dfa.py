@@ -108,7 +108,7 @@ class DFA:
     def to_json(self):
         return self.states.copy()
 
-    def get_graph(self, name="outputs/dfa_graph", view=False):
+    def get_graph(self, path="outputs/", view=False):
         '''
         Return the DFA as a graph
         '''
@@ -134,5 +134,5 @@ class DFA:
                 if symbol == 'isTerminatingState':
                     continue
                 graph.edge(state, nextState, label=symbol)
-        graph.render(name, view=view)
+        graph.render(path + "dfa_graph", view=view)
         return graph

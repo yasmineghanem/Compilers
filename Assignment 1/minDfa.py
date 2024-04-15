@@ -93,7 +93,7 @@ class MinDFA:
     def to_json(self):
         return self.states.copy()
 
-    def get_graph(self, name="outputs/dfa_min_graph", view=False):
+    def get_graph(self, path="outputs/", view=False):
         '''
         Return Miminzed DFA as a graph
         '''
@@ -118,5 +118,5 @@ class MinDFA:
                 if symbol == 'isTerminatingState':
                     continue
                 graph.edge(state, nextState, label=symbol)
-        graph.render(name, view=view)
+        graph.render(path + "min_dfa", view=view)
         return graph
