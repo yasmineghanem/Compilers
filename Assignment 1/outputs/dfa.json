@@ -1,1 +1,1 @@
-{"startingState": "S0,S2,S3,S4", "S0,S2,S3,S4": {"a": "S5", "b": "S1,S3,S4", "isTerminatingState": false}, "S5": {"isTerminatingState": true}, "S1,S3,S4": {"a": "S5", "isTerminatingState": false}}
+{"startingState": "S0,S2", "S0,S2": {"a": "S0,S1,S2,S3,S4,S6,S7", "isTerminatingState": false}, "S0,S1,S2,S3,S4,S6,S7": {"a": "S0,S1,S2,S3,S4,S6,S7", "b": "S4,S5,S6,S7", "isTerminatingState": true}, "S4,S5,S6,S7": {"b": "S4,S5,S6,S7", "isTerminatingState": true}}

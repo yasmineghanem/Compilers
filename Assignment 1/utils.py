@@ -63,7 +63,7 @@ def regex_to_postfix(regex):
         if regex[i] =='[':
             while regex[i] !=']':
                 i+=1
-            if i+1<len(regex) and regex[i+1].isalnum():
+            if i+1<len(regex) and (regex[i+1].isalnum() or regex[i+1]=='('or regex[i+1]=='['):
                 dotsIndex.append(i)
         elif regex[i] in startOps and regex[i+1] not in endOps:
             dotsIndex.append(i)
