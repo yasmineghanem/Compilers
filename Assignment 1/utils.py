@@ -127,6 +127,7 @@ def write_json(fsm, filename="outputs/dummy.json"):
     '''
     Turns fsm json object to json file
     '''
+    print(fsm)
     json_object = json.dumps(fsm, indent=4)
     with open(filename, "w") as f:
-        json.dump(fsm, f)
+        f.write(json_object)
