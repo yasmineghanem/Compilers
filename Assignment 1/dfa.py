@@ -3,6 +3,7 @@ from graphviz import Digraph
 from nfa import NFA, State
 from utils import *
 
+
 class DFA:
     def __init__(self, nfa):
         self.nfa = nfa
@@ -10,7 +11,7 @@ class DFA:
 
     def get_dfa_states(self):
         return self.states.copy()
-    
+
     def get_symbols(self):
         return self.nfa.get_symbols()
 
@@ -71,7 +72,7 @@ class DFA:
             [self.nfa.start_state])
         self.states = {'startingState': start_state_string}
         # print(
-            # f'Start State: {start_state}, Start State String: {start_state_string}')
+        # f'Start State: {start_state}, Start State String: {start_state_string}')
 
         # create a queue to store the states that need to be processed
         queue = deque()
@@ -103,28 +104,35 @@ class DFA:
         # print('States:', self.states)
 
         return self.states
+
     def to_json(self):
         return self.states.copy()
-    
+
     def get_graph(self, name="outputs/dfa_graph", view=False):
         '''
         Return the DFA as a graph
         '''
-        nfa = self.get_dfa_states()
+        dfa = self.get_dfa_states()
         graph = Digraph(engine='dot')
-        for state, transitions in nfa.items():
+        starting_state = ''
+        for state, transitions in dfa.items():
             if state == 'startingState':
+                starting_state = dfa[state]
                 continue
             if transitions['isTerminatingState']:
-                graph.node(state, shape='doublecircle')
+                if state == starting_state:
+                    graph.node(state, shape='doublecircle', color='blue')
+                else:
+                    graph.node(state, shape='doublecircle')
             else:
-                graph.node(state, shape='circle')
+                if state == starting_state:
+                    graph.node(state, shape='circle', color='blue')
+                else:
+                    graph.node(state, shape='circle')
 
             for symbol, nextState in transitions.items():
                 if symbol == 'isTerminatingState':
                     continue
-                # childStates = nextState.split(',')
-                # for child in childStates:
                 graph.edge(state, nextState, label=symbol)
         graph.render(name, view=view)
         return graph

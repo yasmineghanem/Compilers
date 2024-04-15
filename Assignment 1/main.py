@@ -8,31 +8,31 @@ def __main__():
 
     # 1. Get user Input
     regex = input("Enter a regular expression: ")
-    regex_tests = ['(a*?)*',  # 0
-                   '(a*)*',  # 1 done
-                   '(b?a)',  # 2
-                   '(a*b*)([a-b]*)',  # 3
-                   '(a+?a+?)+?b',  # 4
-                   '(a+a+)+b',  # 5
-                   '(a|b)*a[ab]?',  # 6
-                   '[a-c]*',  # 7
-                   '[A-Ea-c]+1|2[0-9]*k?[ABC](ABC)',  # 8
-                   '[a-f0-9]32',  # 9
-                   '[a-fA-C]',  # 10
-                   '[abc](d|e|f)',  # 11
-                   '[bc]*(cd)+',  # 12
-                   'a*b+[a-z]c?',  # 13
-                   'a*|b*',  # 14
-                   'a*b*ca',  # 15
-                   'a+|b+',  # 16
-                   'a+b',  # 17
-                   'a+b*',  # 18
-                   'a+b*a',  # 19
-                   'ab(b|c)*d+',  # 20
-                   'Aym[o+o+]na?',  # 21
-                   'employ(er|ee|ment|ing|able)',  # 22
-                   'kam*(o|ou)la?',  # 23
-                   'lex(eme|er|ical)[0-9]+'  # 24
+    print("You entered:", regex)
+    regex_tests = ['(a*?)*',                            # 0 done
+                   '(a*)*',                             # 1 done
+                   '(b?a)',                             # 2 done
+                   '(a*b*)([a-b]*)',                    # 3 done
+                   '(a+?a+?)+?b',                       # 4 done
+                   '(a+a+)+b',                          # 5 done
+                   '(a|b)*a[ab]?',                      # 6 done
+                   '[a-c]*',                            # 7 done
+                   '[A-Ea-c]+1|2[0-9]*k?[ABC](ABC)',    # 8 done
+                   '[a-f0-9]32',                        # 9 done
+                   '[a-fA-C]',                          # 10 done
+                   '[abc](d|e|f)',                      # 11 done
+                   '[bc]*(cd)+',                        # 12 done
+                   'a*b+[a-z]c?',                       # 13 done
+                   'a*|b*',                             # 14 done
+                   'a*b*ca',                            # 15 done
+                   'a+|b+',                             # 16 done
+                   'a+b',                               # 17 done
+                   'a+b*',                              # 18 done
+                   'a+b*a',                             # 19 done
+                   'ab(b|c)*d+',                        # 20 done
+                   'employ(er|ee|ment|ing|able)',       # 21 done
+                   'kam*(o|ou)la?',                     # 22 done
+                   'lex(eme|er|ical)[0-9]+'             # 23 done
                    ]
 
     # # 2. Check if the regex is valid
@@ -42,10 +42,9 @@ def __main__():
 
     # 3. Turn regex to postfix
     postfixRegex = regex_to_postfix(regex)
-    print("postfix regex:", postfixRegex)
 
     # 4. Turn postfix to NFA & Display
-    nfa = NFA(regex=regex)
+    nfa = NFA(regex=postfixRegex)
     nfa.get_graph()
 
     # 5. Write the NFA to a file

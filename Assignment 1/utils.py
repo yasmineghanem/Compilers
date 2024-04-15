@@ -73,9 +73,6 @@ def regex_to_postfix(regex):
     for i in range(len(dotsIndex)):
         regex = regex[:dotsIndex[i] + 1 + i] + \
             '.' + regex[dotsIndex[i] + 1 + i:]
-    # if regex[-1] =='.' and (regex[-2]=='.' or regex[-2]=='?' or regex[-2]=='*'  ):
-    #     regex = regex[:-2]
-    print(regex)
             
 
     # Shunt_Yard Algorithm
@@ -106,8 +103,6 @@ def regex_to_postfix(regex):
         postfix, stack = postfix + stack[-1], stack[:-1]
 
     return postfix
-
-# print(regex_to_postfix("[a-c]"))
 
 
 def write_json(fsm, filename="outputs/dummy.json"):

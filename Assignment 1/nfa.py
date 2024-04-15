@@ -212,13 +212,21 @@ class NFA:
         '''
         nfa = self.to_json()
         graph = Digraph(engine='dot')
+        starting_state = ''
         for state, transitions in nfa.items():
             if state == 'startingState':
+                starting_state = nfa[state]
                 continue
             if transitions['isTerminatingState']:
-                graph.node(state, shape='doublecircle')
+                if state == starting_state:
+                    graph.node(state, shape='doublecircle', color='blue')
+                else:
+                    graph.node(state, shape='doublecircle')
             else:
-                graph.node(state, shape='circle')
+                if state == starting_state:
+                    graph.node(state, shape='circle', color='blue')
+                else:
+                    graph.node(state, shape='circle')
 
             for symbol, nextState in transitions.items():
                 if symbol == 'isTerminatingState':
