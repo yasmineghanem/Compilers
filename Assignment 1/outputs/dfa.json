@@ -1,1 +1,1 @@
-{"startingState": "S0,S4,S5", "S0,S4,S5": {"c": "S1,S2", "isTerminatingState": true}, "S1,S2": {"[a-z]": "S3,S5", "isTerminatingState": false}, "S3,S5": {"isTerminatingState": true}}
+{"startingState": "S0,S2,S3,S4", "S0,S2,S3,S4": {"a": "S5", "b": "S1,S3,S4", "isTerminatingState": false}, "S5": {"isTerminatingState": true}, "S1,S3,S4": {"a": "S5", "isTerminatingState": false}}

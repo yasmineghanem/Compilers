@@ -44,7 +44,7 @@ def __main__():
     print("postfix regex:", postfixRegex)
 
     # 4. Turn postfix to NFA & Display
-    nfa = NFA(regex='c[a-z].?')
+    nfa = NFA(regex='b?a.')
     nfa.get_graph()
 
     # 5. Write the NFA to a file

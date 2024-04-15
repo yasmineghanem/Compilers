@@ -1,1 +1,1 @@
-{"startingState": 0, "0": {"c": "2", "isTerminatingState": true}, "2": {"[a-z]": "1", "isTerminatingState": false}}
+{"startingState": 0, "1": {"a": "0", "b": "2", "isTerminatingState": false}, "2": {"a": "0", "isTerminatingState": false}}

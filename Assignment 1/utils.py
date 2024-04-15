@@ -58,12 +58,13 @@ def regex_to_postfix(regex):
     dotsIndex = []
     i = 0
     while i < len(regex)-1:
-        startOps = [')', "*", "+", "*",']']
-        endOps = ["*", "+", ".", "|", ")",']']
+        startOps = [')', "*", "+",']','?']
+        endOps = ["*", "+", ".", "|", ")",']','?']
         if regex[i] =='[':
             while regex[i] !=']':
                 i+=1
-            dotsIndex.append(i)
+            if i+1<len(regex) and regex[i+1].isalnum():
+                dotsIndex.append(i)
         elif regex[i] in startOps and regex[i+1] not in endOps:
             dotsIndex.append(i)
         elif regex[i].isalnum() and (regex[i+1].isalnum() or regex[i+1] == '(' or regex[i+1] == '['):
@@ -72,7 +73,10 @@ def regex_to_postfix(regex):
     for i in range(len(dotsIndex)):
         regex = regex[:dotsIndex[i] + 1 + i] + \
             '.' + regex[dotsIndex[i] + 1 + i:]
-
+    # if regex[-1] =='.' and (regex[-2]=='.' or regex[-2]=='?' or regex[-2]=='*'  ):
+    #     regex = regex[:-2]
+    print(regex)
+            
 
     # Shunt_Yard Algorithm
     for i in range(len(regex)):
@@ -86,7 +90,8 @@ def regex_to_postfix(regex):
                 postfix = postfix + stack[-1]
                 stack = stack[:-1]
             stack = stack[:-1]  # remove the parenthesis 
-
+        elif c =='?':
+                postfix = postfix + c
         # If the character is an operator append if higher precedence and push the other one to stack.
         elif c in operators:
             while stack and operators.get(c, 0) <= operators.get(stack[-1], 0):
