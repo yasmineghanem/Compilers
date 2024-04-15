@@ -120,7 +120,7 @@ class NFA:
                 start = State("S"+str(index))
                 accepting = State("S"+str(index+1))
                 # Add the 2 paths one with symbol and one empty to the end
-                start.add_transition('ϵ', nfa1.start_state)
+                start.add_transition('ϵ', nfa.start_state)
                 start.add_transition('ϵ', accepting)
                 # Add the path with epsilon transition to the end
                 nfa.accept_state.add_transition('ϵ', accepting)

@@ -40,8 +40,8 @@ def is_regex_validdd(regex):
 
 
 # Test
-validity_check = is_regex_valid("[A-Zl]/ko;]")
-print(validity_check)
+# validity_check = is_regex_valid("[A-Zl]/ko;]")
+# print(validity_check)
 
 
 def regex_to_postfix(regex):
@@ -57,12 +57,13 @@ def regex_to_postfix(regex):
     # Insert a concatenation (.) between any two adjacent symbols if there is none exists/bracket
     dotsIndex = []
     i = 0
-    while i < len(regex) - 1:
+    while i < len(regex)-1:
         startOps = [')', "*", "+", "*",']']
         endOps = ["*", "+", ".", "|", ")",']']
         if regex[i] =='[':
             while regex[i] !=']':
                 i+=1
+            dotsIndex.append(i)
         elif regex[i] in startOps and regex[i+1] not in endOps:
             dotsIndex.append(i)
         elif regex[i].isalnum() and (regex[i+1].isalnum() or regex[i+1] == '(' or regex[i+1] == '['):

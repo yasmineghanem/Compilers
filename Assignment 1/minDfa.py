@@ -5,7 +5,7 @@ class MinDFA:
 
     def __init__(self, dfa):
         self.dfa = dfa
-        self.states = self.minimize_dfa(dfa)
+        self.states = self.minimize_dfa()
         
     def get_group_index(self, group):
         indeces = []
@@ -14,7 +14,7 @@ class MinDFA:
                 indeces.append(index)
         return indeces
     
-    def minimize_dfa(self,dfa):
+    def minimize_dfa(self):
         states = self.dfa.get_dfa_states() 
         symbols = self.dfa.get_symbols()
         states.pop('startingState')
@@ -81,7 +81,7 @@ class MinDFA:
         return newGroups
         
     def to_json(self):
-        return self.states
+        return self.states.copy()
     
     def get_graph(self, name="outputs/dfa_min_graph",view=False):
         '''
