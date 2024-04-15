@@ -91,7 +91,7 @@ class NFA:
                 start = State("S"+str(index))
                 accepting = State("S"+str(index+1))
                 # Add the 2 paths one with symbol and one empty to the end
-                start.add_transition('ϵ', nfa1.start_state)
+                start.add_transition('ϵ', nfa.start_state)
                 start.add_transition('ϵ', accepting)
                 # Add the 2 paths with epsilon transition to the end and back again to start
                 nfa.accept_state.add_transition('ϵ', start)
@@ -193,7 +193,7 @@ class NFA:
 
     def to_json(self):
         states = {}
-        for state in self.get_states:
+        for state in self.get_states():
             stateDictionary = {
                 'isTerminatingState': state.accepting,
             }
@@ -206,28 +206,28 @@ class NFA:
 
         return {'startingState': self.start_state.name, **states, }
 
-    def get_graph(self, name="fsm", view=False):
+    def get_graph(self, name="outputs/nfa_graph", view=False):
         '''
         Return the NFA as a graph
         '''
-        nfa = self.get_states()
-        g = Digraph(engine='dot')
+        nfa = self.to_json()
+        graph = Digraph(engine='dot')
         for state, transitions in nfa.items():
             if state == 'startingState':
                 continue
             if transitions['isTerminatingState']:
-                g.node(state, shape='doublecircle')
+                graph.node(state, shape='doublecircle')
             else:
-                g.node(state, shape='circle')
+                graph.node(state, shape='circle')
 
             for symbol, nextState in transitions.items():
                 if symbol == 'isTerminatingState':
                     continue
                 childStates = nextState.split(',')
                 for child in childStates:
-                    g.edge(state, child, label=symbol)
-        g.render(name, view=view)
-        return g
+                    graph.edge(state, child, label=symbol)
+        graph.render(name, view=view)
+        return graph
 
     # # Override print
     # def __str__(self):

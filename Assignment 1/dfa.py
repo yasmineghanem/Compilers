@@ -10,6 +10,9 @@ class DFA:
 
     def get_dfa_states(self):
         return self.states
+    
+    def get_symbols(self):
+        return self.nfa.get_symbols()
 
     def epsilon_closure(self, state):
         # Epsilon closure of a set of states is the set of states reachable from the input set of states
@@ -101,25 +104,25 @@ class DFA:
 
         return self.states
 
-    def get_graph(self, name="dfa_graph", view=False):
+    def get_graph(self, name="outputs/dfa_graph", view=False):
         '''
         Return the DFA as a graph
         '''
         nfa = self.get_dfa_states()
-        g = Digraph(engine='dot')
+        graph = Digraph(engine='dot')
         for state, transitions in nfa.items():
             if state == 'startingState':
                 continue
             if transitions['isTerminatingState']:
-                g.node(state, shape='doublecircle')
+                graph.node(state, shape='doublecircle')
             else:
-                g.node(state, shape='circle')
+                graph.node(state, shape='circle')
 
             for symbol, nextState in transitions.items():
                 if symbol == 'isTerminatingState':
                     continue
                 # childStates = nextState.split(',')
                 # for child in childStates:
-                g.edge(state, nextState, label=symbol)
-        g.render(name, view=view)
-        return g
+                graph.edge(state, nextState, label=symbol)
+        graph.render(name, view=view)
+        return graph
