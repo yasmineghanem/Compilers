@@ -9,7 +9,7 @@ class DFA:
         self.states = self.nfa_to_dfa()
 
     def get_dfa_states(self):
-        return self.states
+        return self.states.copy()
     
     def get_symbols(self):
         return self.nfa.get_symbols()

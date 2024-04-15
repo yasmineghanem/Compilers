@@ -15,10 +15,12 @@ class MinDFA:
         return indeces
     
     def minimize_dfa(self):
+        #Get all states and symbols of DFA
         states = self.dfa.get_dfa_states() 
         symbols = self.dfa.get_symbols()
         states.pop('startingState')
         groups, acceptingStates, normalStates = [], [], []
+        # seperate goups to accepting and normal states
         for symbol, transition in states.items():
             if transition["isTerminatingState"] == True:
                 acceptingStates.append({symbol: transition})
@@ -26,6 +28,7 @@ class MinDFA:
                 normalStates.append({symbol:transition})
         groups.append(acceptingStates)
         groups.append(normalStates)
+
         split = True
         while split:
             split = False # unless we found a group needs to be split
@@ -64,20 +67,19 @@ class MinDFA:
         hashTable = {}
         for index, group in enumerate(groups):
             for state in group:
-                for i, value in state.items():
-                    hashTable[i] = str(index)
+                for name, transitions in state.items():
+                    hashTable[name] = str(index)
         
         # iterate over the groups
         # for each state in the group loop over its symbol and transitionState
         # if the transition state belongs to another group, replace it with group number
         for index, group in enumerate(groupCopy):
             for state in group:
-                for key, value in state.items():
-                    for symbol, transitionState in value.items():
-                        
+                for __, transition in state.items():
+                    for symbol, transitionState in transition.items():
                         if transitionState in hashTable:
-                            value[symbol] = str(hashTable[transitionState])
-                            newGroups[str(index)] = value
+                            transition[symbol] = str(hashTable[transitionState])
+                            newGroups[str(index)] = transition
         return newGroups
         
     def to_json(self):
