@@ -2,7 +2,6 @@ from utils import *
 from dfa import DFA
 from nfa import NFA
 from minDfa import MinDFA
-import os
 
 
 def __main__():

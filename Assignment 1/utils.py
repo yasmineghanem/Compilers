@@ -4,17 +4,20 @@ import os
 
 
 def create_output_folder(regex, output_path="outputs/"):
+
+    if not os.path.exists(output_path):
+        # create a new directory for the given regex
+        os.makedirs(output_path)
+
     # get number of files in the directory
     folder_name = str(len([name for name in os.listdir(output_path)]))
 
-    if not os.path.exists(output_path + folder_name):
+    os.makedirs(output_path + folder_name)
 
-        # create a new directory for the given regex
-        os.makedirs(output_path + folder_name)
+    # create a new file to write the regex in
+    with open(output_path + folder_name + "/regex.txt", "w") as f:
+        f.write(regex)
 
-        # create a new file to write the regex in
-        with open(output_path + folder_name + "/regex.txt", "w") as f:
-            f.write(regex)
     return folder_name
 
 
