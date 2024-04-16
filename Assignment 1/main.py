@@ -36,7 +36,7 @@ def __main__():
                    ]
 
     # # 2. Check if the regex is valid
-    if not is_regex_valid(regex):
+    if not is_regex_valid2(regex):
         print("Invalid regex")
         return
 

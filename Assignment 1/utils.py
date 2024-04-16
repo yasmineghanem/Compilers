@@ -58,6 +58,48 @@ def is_regex_validdd(regex):
         return False
 
 
+def is_regex_valid2(regex):
+
+    # 1- Check that the characters in regex are within the valid set of characters
+    # 2- check that all brackets are closed
+    regex_operations = ['|', '(', ')', '[', ']', '.',
+                        '?', '*', '+', '-', '\\\\']
+    bracket, parenthesis = 0, 0
+
+    for i, char in enumerate(regex):
+        if not char.isalnum() and char != ' ' and char not in regex_operations:
+            return False
+
+        if char == '(':
+            bracket += 1
+        elif char == ')':
+            bracket -= 1
+        elif char == '[':
+            parenthesis += 1
+        elif char == ']':
+            parenthesis -= 1
+
+        # check for valid ranges -> Assume we use simple range [a-z]
+        if char == '[':
+            # print(ord(regex[i+1]), ord(regex[i+3]))
+            # check if char/num then - then char/num
+            if i < len(regex) and not (regex[i+1].isalnum() and regex[i+2] == '-' and regex[i+3].isalnum()):
+                # print(regex[i+1], regex[i+3])
+                return False
+            # check if char 1 is before char 2
+            if ord(regex[i+1]) > ord(regex[i+3]):
+                print('aa')
+                return False
+        # - has to be inside a []
+        if char == '-':
+            if len(regex) < 5 or i-2 >= len(regex) and regex[i-2] != '[':
+                return False
+
+    if bracket != 0 or parenthesis != 0:
+        return False
+
+    return True
+
 # Test
 # validity_check = is_regex_valid("[A-Zl]/ko;]")
 # print(validity_check)
