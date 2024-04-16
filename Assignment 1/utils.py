@@ -83,12 +83,12 @@ def is_regex_valid2(regex):
         if char == '[':
             # print(ord(regex[i+1]), ord(regex[i+3]))
             # check if char/num then - then char/num
-            if i < len(regex) and not (regex[i+1].isalnum() and regex[i+2] == '-' and regex[i+3].isalnum()):
+            if i+3 < len(regex) and not (regex[i+1].isalnum() and regex[i+2] == '-' and regex[i+3].isalnum()):
                 # print(regex[i+1], regex[i+3])
                 return False
             # check if char 1 is before char 2
-            if ord(regex[i+1]) > ord(regex[i+3]):
-                print('aa')
+            if i+3 < len(regex) and ord(regex[i+1]) > ord(regex[i+3]):
+                # print('aa')
                 return False
         # - has to be inside a []
         if char == '-':
